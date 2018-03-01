@@ -1,0 +1,49 @@
+<div class="row col-xs-12" ng-init="ctrl.refresh()">
+
+	<div class="col-xs-6">
+		<h3>Chart</h3>
+	</div>
+	
+	<div class="col-xs-12">
+		<div class="container">
+			
+			<div class="panel panel-default">
+				
+				<div class="panel-heading">
+					Tasks per project
+				</div>
+			
+				<div class="panel-body">
+					<nvd3 options="ctrl.options" data="ctrl.data" class="with-3d-shadow with-transitions"></nvd3>
+				</div>
+				
+				<div class="panel-footer">
+				</div>
+
+			</div>
+			
+		</div>
+	</div>
+	
+	<div class="row col-xs-12">
+		<button ng-click="ctrl.refresh()">Refresh</button>
+	</div>
+	
+	<!--div class="row col-xs-12">
+		User<br>
+		{{ctrl.loggedUser.firstName + ' ' + ctrl.loggedUser.lastName}}<br>
+		<div ng-bind="ctrl.loggedUser._id"></div>
+	</div>
+	<div class="row col-xs-12">
+		first
+		<ul ng-repeat="v in ctrl.data[0]">
+			<li ng-bind="v"></li>
+		</ul>
+		<div>ctrl.data[0] : {{ctrl.data[0]}}<div>
+		<div>ctrl.data.length : {{ctrl.data.length}}<div>
+		<div>ctrl.data[0].key : {{ctrl.data[0].key}}<div>
+		<div>ctrl.data[0].values : {{ctrl.data[0].values}}<div>
+		<div>ctrl.data[0].values.length : {{ctrl.data[0].values.length}}</div-->
+	</div>
+
+</div>

@@ -1,0 +1,85 @@
+Persons
+
+{ _id, firstName, lastName, email, password, isAdmin, isSuperManager, isManager, isWorker }
+
+// email, password are also credentials
+
+// Admin can:
+X// adding new persons and changing their attributes
+X// deleting persons if they are not involved in any project or task
+X// for each person, listing project and tasks they are involved in
+
+Projects
+
+{ _id, name, description, managerId }
+
+// SuperManagers and Managers can:
+X// adding new projects (the projects have a manager who is set on the creator id)
+X// changing name and description of their projects
+X// viewing projects and their tasks not belonged to them
+
+// additionally SuperManagers can:
+X// changing managerid of each project
+
+Tasks
+
+{ _id, description, projectId, workers, dependsOn, deadline, status }
+
+// SuperManagers and Managers can:
+X// creating task for their projects with status not-started
+X// editing all data for each such task except for projectId and except for free changing its status
+X// changing a task status from any other status to cancelled
+X// changing the status from in_tests to completed and in_tests to started
+
+X// statuses: not_started, started, in_tests, completed, cancelled
+X// workers: array of workers involved in the task
+X// dependsOn: list of tasks (ids) which can be completed to enable starting of the task
+// in relational databases workers and dependsOn requires an intermediate table with id of tasks and id of persons/tasks
+
+Events
+
+{ _id, timeStamp, description, collection, updateType, onObject, performerId }
+
+// updateType: insert, delete, update
+
+=========================================================================================================================
+
+X 1. frontend security
+
+now: many aspects of viewing and editing data are not covered by current views, e.g., a manager can browse all projects (not only managed by himself), workers to task can be determined from all persons, task can be dependent from itself etc.;
+
+goal: frontend has to block any illegal operations (by PMS assumption and common sense) by disabling illegal choices or other methods;
+
+2. backend security
+
+now: validation of data is only provided on the frontend side; roles do not connect with possible interactions with REST interfaces;
+
+goal: a role is strictly connected with success or failure in calling REST (data) and static content provider (views);
+
+3. events view + async notifications
+
+goal: all important event in the system has to be remembered in database; administrators are allowed to view and browse the event log; additionally, any event caused by other user can be asynchronously and immediately reported to corresponding users, e.g., if some worker changes a status of a task to „in-tests”, a logged manager of the project should observe some popup with appropriate message;
+
+4. communication system
+
+goal: a system similar to e-mail, allowing sending to other users, workers of the same task, all managers etc. text messages and organizing/reading them; messages should be stored in database; to increase functionality one can equip the system with notifications, conversations in real time etc.
+
+X 5. graphical data representation
+
+goal: making graphical presentations for some data from database using frontend engine, e.g. Gantt chart of all tasks of some project or time occupation of some worker, or bar graph of tasks finished in the some scope of months;
+
+6. integration with external sources of data (e.g., GoogleMaps)
+
+goal: using of web services provided by companies/organizations, e.g., API to display maps with marks based on our data, provided by Google;
+
+7. frontend in the form of mobile or desktop application
+
+goal: refactoring a frontend part of application to other runtime environment;
+
+8. document repository
+
+goal: each user of the system can upload documents to the server, marking them as a connected to any task/project and describing them by some tags; the documents can be downloaded (read) or changed (uploaded again, with saving previous versions); documents have permission rights enabling or disabling some operations (read/change) for some users; one can easily find a document which he is interested in;
+
+=========================================================================================================================
+
+1 (i/lub) 3 (i/lub) 5
